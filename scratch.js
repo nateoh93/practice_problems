@@ -170,3 +170,28 @@ const isRotation = (str1, str2) => {
     return false;
 }
 
+const kthEle = (node, k) => {
+    let first = node;
+    let second = node;
+    for (let i = 1; i < k; i++) {
+        if (first.next === null) return null;
+        first = first.next;
+    }
+    
+    while (first) {
+        first = first.next;
+        second = second.next;
+    }
+
+    return second.val;
+}
+
+const deleteNode = (node) => {
+    if (!node || !node.next) return false;
+
+    let nextNode = node.next;
+    node.val = nextNode.val;
+    node.next = nextNode.next;
+}
+
+console.log(deleteNode(node))
