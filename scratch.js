@@ -194,5 +194,31 @@ const deleteNode = (node) => {
     node.next = nextNode.next;
 }
 
-console.log(deleteNode(node))
+// console.log(deleteNode(node))
 
+
+//sliding window (2 pointers + criteria)
+const minSubArrayLen = (criteria, array) => {
+    let minLen = Infinity;
+    let i = 0;
+    let sum = 0;
+
+    for (let j = 0; j < array.length; j++) {
+        sum += array[j];
+        console.log('sum',sum)
+        console.log('j', j)
+        while (sum >= criteria) {
+            console.log('sum',sum)
+            minLen = Math.min(minLen, j - i + 1);
+            console.log('minLen',minLen)
+            console.log('i++',i)
+            console.log('array[i++]',array[i++])
+            // i++
+            sum -= array[i++];
+        }
+    }
+
+    console.log('results',minLen === Infinity ? 0 : minLen)
+}
+
+console.log(minSubArrayLen(5, [0, 2, -1, 3, 4, 1, -2]))
