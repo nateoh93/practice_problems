@@ -223,111 +223,132 @@ const minSubArrayLen = (criteria, array) => {
 
 // console.log(minSubArrayLen(5, [0, 2, -1, 3, 4, 1, -2]))
 
-import React from 'react';
-import classnames from 'classnames';
-// you should import `lodash` as a whole module
-import lodash from 'lodash';
-import axios from 'axios';
+// import React from 'react';
+// import classnames from 'classnames';
+// // you should import `lodash` as a whole module
+// import lodash from 'lodash';
+// import axios from 'axios';
 
-const ITEMS_API_URL = 'https://example.com/api/items';
-const DEBOUNCE_DELAY = 500;
+// const ITEMS_API_URL = 'https://example.com/api/items';
+// const DEBOUNCE_DELAY = 500;
 
-// the exported component can be either a function or a class
+// // the exported component can be either a function or a class
 
-class Autocomplete extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: [],
-      search: '',
-    };
-    this.handleSearch = this.handleSearch.bind(this);
-    this.displayList = this.displayList.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
+// class Autocomplete extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       list: [],
+//       search: '',
+//     };
+//     this.handleSearch = this.handleSearch.bind(this);
+//     this.displayList = this.displayList.bind(this);
+//     this.handleClick = this.handleClick.bind(this);
+//   }
 
-  handleSearch(e) {
-    if (e.currentTarget.value.length === 0) {
-      this.setState({list: []})
-    } else {
-      axios.get(`${ITEMS_API_URL}?q=${e.currentTarget.value}`)
-        .then(res => this.setState({list: res.data}, () => console.log(this.state)));
-    };
-  }
+//   handleSearch(e) {
+//     if (e.currentTarget.value.length === 0) {
+//       this.setState({list: []})
+//     } else {
+//       axios.get(`${ITEMS_API_URL}?q=${e.currentTarget.value}`)
+//         .then(res => this.setState({list: res.data}, () => console.log(this.state)));
+//     };
+//   }
 
-  displayList() {
-    const {list} = this.state;
+//   displayList() {
+//     const {list} = this.state;
 
-    return list.map(item => {
-      return <a className='list-item' onClick={() => this.handleClick(item)}>{item}</a>
-    })
-  }
+//     return list.map(item => {
+//       return <a className='list-item' onClick={() => this.handleClick(item)}>{item}</a>
+//     })
+//   }
 
-  handleClick(e) {
-    alert(`Selected: ${e}`);
-  }
+//   handleClick(e) {
+//     alert(`Selected: ${e}`);
+//   }
 
-  render() {
-    return (
-      <div className="wrapper">
-        <div className="control">
-          <input type="text" className="input" onChange={this.handleSearch} />
-        </div>
-        <div className="list is-hoverable">
-          {this.displayList()}
-        </div>
-      </div>
-    )
-  }
-}
+//   render() {
+//     return (
+//       <div className="wrapper">
+//         <div className="control">
+//           <input type="text" className="input" onChange={this.handleSearch} />
+//         </div>
+//         <div className="list is-hoverable">
+//           {this.displayList()}
+//         </div>
+//       </div>
+//     )
+//   }
+// }
 
-export default Autocomplete;
+// export default Autocomplete;
 
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
+// const express = require('express');
+// const app = express();
+// const bodyParser = require('body-parser');
+// app.use(bodyParser.json());
 
-// app.all('*', (req, res) => {
-//     return res.sendStatus(500);
+// // app.all('*', (req, res) => {
+// //     return res.sendStatus(500);
+// // });
+
+// app.post('/messages', (req, res) => {
+//     const payloadInfo = ['date', 'author', 'channel', 'text'];
+
+//     payloadInfo.forEach (property => {
+//         if (!req.body[property]) return res.sendStatus(422);
+//     });
+
+//     return res.sendStatus(201);
 // });
 
-app.post('/messages', (req, res) => {
-    const payloadInfo = ['date', 'author', 'channel', 'text'];
-
-    payloadInfo.forEach (property => {
-        if (!req.body[property]) return res.sendStatus(422);
-    });
-
-    return res.sendStatus(201);
-});
-
-app.get('/messages', (req, res) => {
-    const author = req.body['author'] ? req.body['author'] : null;
-    const channel = req.body['channel'] ? req.body['channel'] : null;
-    const count = req.body['count'] ? req.body['count'] : 10;
+// app.get('/messages', (req, res) => {
+//     const author = req.body['author'] ? req.body['author'] : null;
+//     const channel = req.body['channel'] ? req.body['channel'] : null;
+//     const count = req.body['count'] ? req.body['count'] : 10;
     
     
 
-    const payload = {
+//     const payload = {
 
-    };
-});
+//     };
+// });
 
 
 
-module.exports = app;
+// module.exports = app;
 
-function solution(S) {
-    // write your code in JavaScript (Node.js 8.9.4)
-    const visited = {};
+// function solution(S) {
+//     // write your code in JavaScript (Node.js 8.9.4)
+//     const visited = {};
     
-    for(let i = 0; i < S.length; i++) {
-        let currentChar = S[i];
-        if (visited[currentChar]) {
-            return currentChar;
-        } else {
-            visited[currentChar] = true;
-        };
-    };
+//     for(let i = 0; i < S.length; i++) {
+//         let currentChar = S[i];
+//         if (visited[currentChar]) {
+//             return currentChar;
+//         } else {
+//             visited[currentChar] = true;
+//         };
+//     };
+// }
+
+function minSwaps(array) {
+    let count = 0;
+
+    let pointer = 0;
+    while (pointer < array.length) {
+        let tempArr = array.slice(pointer);
+        let minIdx = tempArr.indexOf(Math.min(...tempArr));
+
+        if (minIdx !== 0) {
+            [array[pointer], array[minIdx+pointer]] = [array[minIdx+pointer], array[pointer]]
+            count += 2;
+        }
+        pointer++
+    }
+
+    return count
 }
+
+console.log(minSwaps([6,1,3,4,2,5]))
+console.log(minSwaps([3,2,1]))
