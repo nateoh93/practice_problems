@@ -14,6 +14,61 @@
 </style>
 
 <body>
+    <div>
+        <ul id="customers">
+        </ul>
+    </div>
+    <script>
+        let customers = [{ name: "John", email: "john@example.com" },
+            { name: "Mary", email: "mary@example.com" }];
+        function showCustomers(customers, targetList) {
+            // Your code goes here
+            targetList.innerHTML = customers.map(customer => {
+                return `
+                        <li>
+                        <p>${customer.name}</p>
+                        <p id='${customer.name}' style="display:none">${customer.email}</p>
+                        </li>
+                    `
+                }).join('');
+                
+                let customerP = document.querySelectorAll("li > p");
+                customerP.forEach(customer => {
+
+                    customerP.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        console.log(e.target.innerHTML)
+                        // const email = document.getElementById(`${e.target.innerHTML}`);
+                    // if (email.style.display === "none") {
+                        //     email.style.display = "block";
+                        // } else {
+                            //     email.style.display = "none";
+                            // }
+                        })
+                })
+                    
+                    // targetList.addEventListener('click', (e) => {
+                        //     e.preventDefault();
+            //     console.log(e.target.innerHTML)
+            //     const email = document.getElementById(`${e.target.innerHTML}`);
+            //     if (email.style.display === "none") {
+                //         email.style.display = "block";
+                //     } else {
+                    //         email.style.display = "none";
+                    //     }
+                    // })
+                    
+                }
+                
+            showCustomers(customers, document.getElementById("customers"));
+                
+        let customerParagraph = document.querySelectorAll("li > p")[0];
+        if (customerParagraph) {
+            customerParagraph.click();
+        }
+    </script>
+</body>
+<!-- <body>
     <ul></ul>
     <script>
         const coolThings = [
@@ -40,5 +95,5 @@
             i = (i + 1) % 3;
         }, 1000);
     </script>
-</body>
+</body> -->
 </html>

@@ -350,5 +350,88 @@ function minSwaps(array) {
     return count
 }
 
-console.log(minSwaps([6,1,3,4,2,5]))
-console.log(minSwaps([3,2,1]))
+// console.log(minSwaps([6,1,3,4,2,5]))
+// console.log(minSwaps([3,2,1]))
+
+// function showCustomers(customers, targetList) {
+//   // Your code goes here
+//   targetList.innerHTML = customers.map(customer => {
+//     return `
+//       <li>
+//         <p>${customer.name}</p>
+//         <p id=${customer.name}=>${customer.email}</p>
+//       </li>
+//     `
+//   }).join('');
+  
+//   targetList.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     console.log(e.target)
+//      const email = document.getElementById("e.target.value");
+//     if (email.style.display === "none") {
+//       email.style.display === "block";
+//     } else {
+//       email.style.display === "none";
+//     }
+//   })
+  
+// }
+
+// function getInParallel(apiCalls) {
+//   // Write your code here
+// //   let print = []
+
+// //   let i = 0;
+// //   while (i < apiCalls.length) {
+// //     apiCalls[i]().then( res => {
+// //         return res
+// //     })
+   
+// //     i++;
+// //   }
+// //     let print = []
+// //   apiCalls.forEach(apiCall => {
+// //     apiCall.then( function(response) {
+// //       print.push(response);
+// //     })
+// //   });
+  
+// //   return print;
+// //   apiCalls.forEach(apiCall => {
+// //     apiCall().then( res => {
+// //         console.log(results)
+// //     })
+// //   });
+
+// //   console.log(...apiCalls);
+  
+// //   apiCalls.forEach(apiCall => {
+// //     apiCall().then( res => {
+// //         console.log([res])
+// //     })
+// //   });
+// }
+
+// let promise = getInParallel([() => Promise.resolve("First API call!"),
+//                              () => Promise.resolve("Second API call!")]);
+// if(promise) {
+//   promise.then((result) => console.log(result)).catch((err) => console.log(err));
+// }
+
+function createEmitter(onOpen, onClose) {    
+  onOpen();
+  onClose();
+}
+
+function opened(emitter) {
+  return emitter;
+}
+function closed(emitter) {
+  return emitter;
+}
+
+let emitter = createEmitter(
+  () => console.log("Opened!"), () => console.log("Closed!")
+);
+opened(emitter);
+closed(emitter);
