@@ -418,20 +418,47 @@ function minSwaps(array) {
 //   promise.then((result) => console.log(result)).catch((err) => console.log(err));
 // }
 
-function createEmitter(onOpen, onClose) {    
-  onOpen();
-  onClose();
-}
+// function createEmitter(onOpen, onClose) {    
+//   onOpen();
+//   onClose();
+// }
 
-function opened(emitter) {
-  return emitter;
-}
-function closed(emitter) {
-  return emitter;
-}
+// function opened(emitter) {
+//   return emitter;
+// }
+// function closed(emitter) {
+//   return emitter;
+// }
 
-let emitter = createEmitter(
-  () => console.log("Opened!"), () => console.log("Closed!")
-);
-opened(emitter);
-closed(emitter);
+// let emitter = createEmitter(
+//   () => console.log("Opened!"), () => console.log("Closed!")
+// );
+// opened(emitter);
+// closed(emitter);
+
+function getIdealNums(low, high) {
+    // Write your code here
+    let num = 0;
+    let x = y = 0;
+    let currInt = 0;
+    while (currInt <= high) {
+        currInt = Math.pow(3, x) * Math.pow(5, y);
+        let tempInt = currInt;
+        while (tempInt < high) {
+            tempInt = Math.pow(3, x) * Math.pow(5, y)
+            if (tempInt >= low && tempInt <= high) num++;
+            y++;
+        }
+        y = 0;
+        x++;
+        // if (currInt < low) {
+        //     y++
+        // }
+        // if (currInt >= low && currInt <= high) {
+        //     num++;
+
+        // }
+    }
+
+    return num;
+}
