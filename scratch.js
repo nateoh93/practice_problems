@@ -462,3 +462,33 @@ function getIdealNums(low, high) {
 
     return num;
 }
+
+function matchPattern(words, pattern) {
+    let matchedWords = [];
+
+    words.forEach(word => {
+        if (isMatch(word, pattern)) matchedWords.push(word);
+    });
+
+    return matchedWords;
+}
+
+function isMatch(word, pattern) {
+    if (word.length !== pattern.length) return false;
+
+    let wordToPattern = {};
+    let patternToWord = {};
+
+    for (let i = 0; i < word.length; i++) {
+        if (!wordToPattern[word[i]]) wordToPattern[word[i]] = pattern[i];
+        if (!patternToWord[pattern[i]]) patternToWord[pattern[i]] = word[i];
+
+        if (wordToPattern[word[i]] !== pattern[i] || patternToWord[pattern[i]] !== word[i]) return false;
+    };
+
+    return true;
+}
+
+console.log(matchPattern(['aa','bb'], 'cc'))
+console.log(matchPattern(['aac','bbc', 'bcb', 'yzy'], 'ghg'))
+console.log(matchPattern(['aa','bb'], 'zy'))
