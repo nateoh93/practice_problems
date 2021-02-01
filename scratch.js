@@ -489,6 +489,6 @@ function isMatch(word, pattern) {
     return true;
 }
 
-console.log(matchPattern(['aa','bb'], 'cc'))
-console.log(matchPattern(['aac','bbc', 'bcb', 'yzy'], 'ghg'))
-console.log(matchPattern(['aa','bb'], 'zy'))
+// console.log(matchPattern(['aa','bb'], 'cc'))
+// console.log(matchPattern(['aac','bbc', 'bcb', 'yzy'], 'ghg'))
+// console.log(matchPattern(['aa','bb'], 'zy'))
