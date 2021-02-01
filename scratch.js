@@ -492,3 +492,65 @@ function isMatch(word, pattern) {
 // console.log(matchPattern(['aa','bb'], 'cc'))
 // console.log(matchPattern(['aac','bbc', 'bcb', 'yzy'], 'ghg'))
 // console.log(matchPattern(['aa','bb'], 'zy'))
+
+var isAnagram = function(s, t) {
+    if (s.length !== t.length) return false;
+    
+    let obj = {};
+    
+    for (let i = 0; i < s.length; i++) {
+        if (!obj[s[i]]) {
+            obj[s[i]] = 1;
+        } else {
+            obj[s[i]]++;
+        };
+        
+        if (!obj[t[i]]) {
+            obj[t[i]] = -1;
+        } else {
+            obj[t[i]]--;
+        };
+    }
+    
+    // let output = true;
+
+    // Object.values(obj).forEach (val => {
+    //     if (val !== 0) output = false;   
+    // });
+    function valEqualsZero(val) {
+        return val === 0;
+    };
+    
+    Object.values(obj).every( val => valEqualsZero(val));
+    console.log(Object.values(obj))
+    // return output;
+};
+
+// console.log(isAnagram('anagram', 'nagaram'))
+
+function fib(n) {
+    // if (n <= 1 || n === 2) return 1;
+    if (n === 0) return 0;
+    if (n === 1) return 1;
+    
+    return fib(n-1) + fib(n-2)
+}
+
+// console.log(fib(3))
+// console.log(fib(5))
+
+function fibIter(n) {
+    if (n === 1 || n === 2) return 1;
+
+    let tracker = [1, 1];
+    
+    while (tracker.length < n) {
+        let next = tracker[tracker.length - 1] + tracker[tracker.length - 2];
+        tracker.push(next);
+    }
+
+    return tracker[tracker.length - 1];
+};
+
+console.log(fibIter(3));
+console.log(fibIter(5));
