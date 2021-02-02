@@ -321,18 +321,13 @@ var isAnagram = function(s, t) {
         };
     }
     
-    // let output = true;
+    let output = true;
 
-    // Object.values(obj).forEach (val => {
-    //     if (val !== 0) output = false;   
-    // });
-    function valEqualsZero(val) {
-        return val === 0;
-    };
-    
-    Object.values(obj).every( val => valEqualsZero(val));
-    console.log(Object.values(obj))
-    // return output;
+    Object.values(obj).forEach (val => {
+        if (val !== 0) output = false;   
+    });
+
+    return output;
 };
 
 // console.log(isAnagram('anagram', 'nagaram'))
@@ -407,21 +402,6 @@ function quickSort(n) {
 
 // console.log(quickSort([7, 3, 8, 9, 2]))
 
-function quickSortIter(n) {
-    if (n.length <= 1) return n;
-
-    let pivot = n.shift();
-    let left = n.filter( val => val < pivot);
-    let right = n.filter( val => val >= pivot);
-
-    let leftSort = quickSort(left);
-    let rightSort = quickSort(right);
-
-    return [...leftSort, pivot, ...rightSort]
-}
-
-// console.log(quickSortIter([7, 3, 8, 9, 2]))
-
 function mergeSort(n) {
     if (n.length <= 1) return n;
 
@@ -452,7 +432,7 @@ function merge(left, right) {
     return merged;
 }
 
-// console.log(mergeSort([7, 3, 8, 9, 2]))
+console.log(mergeSort([7, 3, 8, 9, 2]))
 
 function bsearch(n, target) {
     if (n.length < 1) return -1;
@@ -525,3 +505,47 @@ function bfs(root) {
         if (curr.right) queue.push(curr.right);
     }
 }
+
+var dailyTemperatures = function(T) {
+    const stack = [], result = [];
+    
+    for(let i = T.length-1; i >= 0; i--) {
+        let top = stack[stack.length-1];
+        
+        console.log('top', top)
+        while(stack.length && T[top] <= T[i]) {
+            console.log('enter while')
+            stack.pop();
+            top = stack[stack.length-1];
+        }
+
+        !stack.length ? result.push(0) : result.push(top - i);
+        stack.push(i);
+
+        console.log('stack', stack)
+        console.log('result', result)
+        console.log('-----')
+    }
+    return result.reverse();
+};
+
+// console.log(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))
+
+function bubblesort(n) {
+    let sorted = true;
+
+    while (sorted) {
+        sorted = false;
+
+        for (let i = 0; i < n.length; i++) {
+            if (n[i] > n[i+1]) {
+                [n[i], n[i+1]] = [n[i+1], n[i]]
+                sorted = true;
+            }
+        }
+    }
+
+    return n
+}
+
+// console.log(bubblesort([7, 3, 8, 9, 2]))
