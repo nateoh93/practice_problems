@@ -223,114 +223,6 @@ const minSubArrayLen = (criteria, array) => {
 
 // console.log(minSubArrayLen(5, [0, 2, -1, 3, 4, 1, -2]))
 
-// import React from 'react';
-// import classnames from 'classnames';
-// // you should import `lodash` as a whole module
-// import lodash from 'lodash';
-// import axios from 'axios';
-
-// const ITEMS_API_URL = 'https://example.com/api/items';
-// const DEBOUNCE_DELAY = 500;
-
-// // the exported component can be either a function or a class
-
-// class Autocomplete extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       list: [],
-//       search: '',
-//     };
-//     this.handleSearch = this.handleSearch.bind(this);
-//     this.displayList = this.displayList.bind(this);
-//     this.handleClick = this.handleClick.bind(this);
-//   }
-
-//   handleSearch(e) {
-//     if (e.currentTarget.value.length === 0) {
-//       this.setState({list: []})
-//     } else {
-//       axios.get(`${ITEMS_API_URL}?q=${e.currentTarget.value}`)
-//         .then(res => this.setState({list: res.data}, () => console.log(this.state)));
-//     };
-//   }
-
-//   displayList() {
-//     const {list} = this.state;
-
-//     return list.map(item => {
-//       return <a className='list-item' onClick={() => this.handleClick(item)}>{item}</a>
-//     })
-//   }
-
-//   handleClick(e) {
-//     alert(`Selected: ${e}`);
-//   }
-
-//   render() {
-//     return (
-//       <div className="wrapper">
-//         <div className="control">
-//           <input type="text" className="input" onChange={this.handleSearch} />
-//         </div>
-//         <div className="list is-hoverable">
-//           {this.displayList()}
-//         </div>
-//       </div>
-//     )
-//   }
-// }
-
-// export default Autocomplete;
-
-// const express = require('express');
-// const app = express();
-// const bodyParser = require('body-parser');
-// app.use(bodyParser.json());
-
-// // app.all('*', (req, res) => {
-// //     return res.sendStatus(500);
-// // });
-
-// app.post('/messages', (req, res) => {
-//     const payloadInfo = ['date', 'author', 'channel', 'text'];
-
-//     payloadInfo.forEach (property => {
-//         if (!req.body[property]) return res.sendStatus(422);
-//     });
-
-//     return res.sendStatus(201);
-// });
-
-// app.get('/messages', (req, res) => {
-//     const author = req.body['author'] ? req.body['author'] : null;
-//     const channel = req.body['channel'] ? req.body['channel'] : null;
-//     const count = req.body['count'] ? req.body['count'] : 10;
-    
-    
-
-//     const payload = {
-
-//     };
-// });
-
-
-
-// module.exports = app;
-
-// function solution(S) {
-//     // write your code in JavaScript (Node.js 8.9.4)
-//     const visited = {};
-    
-//     for(let i = 0; i < S.length; i++) {
-//         let currentChar = S[i];
-//         if (visited[currentChar]) {
-//             return currentChar;
-//         } else {
-//             visited[currentChar] = true;
-//         };
-//     };
-// }
 
 function minSwaps(array) {
     let count = 0;
@@ -352,89 +244,6 @@ function minSwaps(array) {
 
 // console.log(minSwaps([6,1,3,4,2,5]))
 // console.log(minSwaps([3,2,1]))
-
-// function showCustomers(customers, targetList) {
-//   // Your code goes here
-//   targetList.innerHTML = customers.map(customer => {
-//     return `
-//       <li>
-//         <p>${customer.name}</p>
-//         <p id=${customer.name}=>${customer.email}</p>
-//       </li>
-//     `
-//   }).join('');
-  
-//   targetList.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     console.log(e.target)
-//      const email = document.getElementById("e.target.value");
-//     if (email.style.display === "none") {
-//       email.style.display === "block";
-//     } else {
-//       email.style.display === "none";
-//     }
-//   })
-  
-// }
-
-// function getInParallel(apiCalls) {
-//   // Write your code here
-// //   let print = []
-
-// //   let i = 0;
-// //   while (i < apiCalls.length) {
-// //     apiCalls[i]().then( res => {
-// //         return res
-// //     })
-   
-// //     i++;
-// //   }
-// //     let print = []
-// //   apiCalls.forEach(apiCall => {
-// //     apiCall.then( function(response) {
-// //       print.push(response);
-// //     })
-// //   });
-  
-// //   return print;
-// //   apiCalls.forEach(apiCall => {
-// //     apiCall().then( res => {
-// //         console.log(results)
-// //     })
-// //   });
-
-// //   console.log(...apiCalls);
-  
-// //   apiCalls.forEach(apiCall => {
-// //     apiCall().then( res => {
-// //         console.log([res])
-// //     })
-// //   });
-// }
-
-// let promise = getInParallel([() => Promise.resolve("First API call!"),
-//                              () => Promise.resolve("Second API call!")]);
-// if(promise) {
-//   promise.then((result) => console.log(result)).catch((err) => console.log(err));
-// }
-
-// function createEmitter(onOpen, onClose) {    
-//   onOpen();
-//   onClose();
-// }
-
-// function opened(emitter) {
-//   return emitter;
-// }
-// function closed(emitter) {
-//   return emitter;
-// }
-
-// let emitter = createEmitter(
-//   () => console.log("Opened!"), () => console.log("Closed!")
-// );
-// opened(emitter);
-// closed(emitter);
 
 function getIdealNums(low, high) {
     // Write your code here
@@ -532,12 +341,40 @@ function fib(n) {
     // if (n <= 1 || n === 2) return 1;
     if (n === 0) return 0;
     if (n === 1) return 1;
-    
+
     return fib(n-1) + fib(n-2)
 }
 
 // console.log(fib(3))
 // console.log(fib(5))
+
+function allFib(n) {
+    if (n === 1 || n === 2) return 1;
+
+    let tracker = [1, 1];
+    
+    while (tracker.length < n) {
+        let next = tracker[tracker.length - 1] + tracker[tracker.length - 2];
+        tracker.push(next);
+    }
+
+    return tracker;
+}
+
+// console.log(allFib(3));
+// console.log(allFib(5));
+
+function allFibRecur(n) {
+    if (n <= 1) return [1];
+    if (n === 2) return [1, 1];
+
+    let fibSeq = allFibRecur(n-1);
+    fibSeq.push(fibSeq[fibSeq.length - 1] + fibSeq[fibSeq.length - 2])
+    return fibSeq;
+}
+
+// console.log(allFibRecur(3));
+// console.log(allFibRecur(5));
 
 function fibIter(n) {
     if (n === 1 || n === 2) return 1;
@@ -552,5 +389,139 @@ function fibIter(n) {
     return tracker[tracker.length - 1];
 };
 
-console.log(fibIter(3));
-console.log(fibIter(5));
+// console.log(fibIter(3));
+// console.log(fibIter(5));
+
+function quickSort(n) {
+    if (n.length <= 1) return n;
+    
+    let pivot = n.shift();
+    let left = n.filter( val => val < pivot);
+    let right = n.filter( val => val >= pivot);
+
+    let leftSort = quickSort(left);
+    let rightSort = quickSort(right);
+
+    return [...leftSort, pivot, ...rightSort]
+}
+
+// console.log(quickSort([7, 3, 8, 9, 2]))
+
+function quickSortIter(n) {
+    if (n.length <= 1) return n;
+
+    let pivot = n.shift();
+    let left = n.filter( val => val < pivot);
+    let right = n.filter( val => val >= pivot);
+
+    let leftSort = quickSort(left);
+    let rightSort = quickSort(right);
+
+    return [...leftSort, pivot, ...rightSort]
+}
+
+// console.log(quickSortIter([7, 3, 8, 9, 2]))
+
+function mergeSort(n) {
+    if (n.length <= 1) return n;
+
+    let midpoint = Math.floor(n.length / 2);
+    let left = n.slice(0, midpoint);
+    let right = n.slice(midpoint);
+
+    let leftSort = mergeSort(left);
+    let rightSort = mergeSort(right);
+
+    return merge(leftSort, rightSort)
+}
+
+function merge(left, right) {
+    let merged = [];
+
+    while (left.length || right.length) {
+        let currLeft = left[0] || Infinity;
+        let currRight = right[0] || Infinity;
+
+        if (currLeft < currRight) {
+            merged.push(left.shift());
+        } else {
+            merged.push(right.shift());
+        }
+    }
+
+    return merged;
+}
+
+// console.log(mergeSort([7, 3, 8, 9, 2]))
+
+function bsearch(n, target) {
+    if (n.length < 1) return -1;
+
+    let midpoint = Math.floor(n.length / 2);
+
+    let left = n.slice(0, midpoint);
+    let right = n.slice(midpoint + 1);
+
+    if (n[midpoint] === target) {
+        return midpoint;
+    } else if (n[midpoint] > target) {
+        return bsearch(left, target);
+    } else {
+        let rightSorted = bsearch(right, target);
+        return rightSorted === -1 ? -1 : rightSorted + midpoint + 1;
+    };
+}
+
+// console.log(bsearch([5, 10, 12, 15, 20, 30, 70], 12))
+// console.log(bsearch([5, 10, 12, 15, 20, 30, 70], 70))
+
+function bsearch(n, target) {
+    if (n.length < 1) return false;
+
+    let midpoint = Math.floor(n.length / 2);
+
+    let left = n.slice(0, midpoint);
+    let right = n.slice(midpoint + 1);
+
+    if (n[midpoint] === target) {
+        return true;
+    } else if (n[midpoint] > target) {
+        return bsearch(left, target);
+    } else {
+        return bsearch(right, target);
+    };
+}
+
+// console.log(bsearch([5, 10, 12, 15, 20, 30, 70], 12))
+// console.log(bsearch([5, 10, 12, 15, 20, 30, 70], 71))
+
+function dfs(root) {
+    let stack = [root];
+
+    while (stack.length) {
+        let curr = stack.pop();
+        console.log(curr.val);
+
+        if (curr.right) stack.push(curr.right);
+        if (curr.left) stack.push(curr.left);
+    }
+}
+
+function dfsRecur(root) {
+    if (!root) return;
+    console.log(root.val);
+    dfsRecur(root.left);
+    dfsRecur(root.right);
+}
+
+function bfs(root) {
+    let queue = [root];
+
+    while (queue.length) {
+        let curr = queue.shift();
+        console.log(curr.val);
+
+        if (curr.left) queue.push(curr.left);
+        if (curr.right) queue.push(curr.right);
+    }
+}
