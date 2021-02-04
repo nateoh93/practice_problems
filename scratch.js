@@ -432,7 +432,7 @@ function merge(left, right) {
     return merged;
 }
 
-console.log(mergeSort([7, 3, 8, 9, 2]))
+// console.log(mergeSort([7, 3, 8, 9, 2]))
 
 function bsearch(n, target) {
     if (n.length < 1) return -1;
@@ -549,3 +549,85 @@ function bubblesort(n) {
 }
 
 // console.log(bubblesort([7, 3, 8, 9, 2]))
+
+function shortenString(str) {
+        let stack = [];
+        for (let i = 0; i < str.length; i++) {
+            console.log(str[i] === '#')
+            if (str[i] !== '#') {
+                stack.push(str[i]);
+            } else {
+                stack.pop();
+            };
+        };
+        // console.log(str, stack)
+        return stack.join('');
+}
+// console.log(shortenString('yf#c#'))
+
+function compareStrings(s1, s2) {
+    // Write your code here
+    
+    let news1 = shortenString(s1);
+    let news2 = shortenString(s2);
+    console.log(news1, news2)
+    let equal = 0;
+    
+    return equal;
+}
+
+
+// console.log(compareStrings('yf#c#', 'yy#k#pp##'))
+
+//input (book)
+
+let book = {
+    1: 'the cat likes to play with string',
+    2: 'the dog likes to play with the ball',
+    6: 'the bird'
+}
+
+function createIndex(book) {
+    let entriesValue = Object.values(book);
+    //['the cat likes to play with string', 'the dog likes to play with the ball', 'the bird']
+    let entriesKey = Object.keys(book);
+    let results = {};
+
+    for (let i = 0; i < entriesValue.length; i++) {
+        let words = entriesValue[i].split(' ');
+        //words = [the, cat, likes, to, play, with, string]
+        words.forEach (word => {
+            if (results[word]) {
+                if (!results[word].has(entriesKey[i])) results[word].add(entriesKey[i]);
+            } else {
+                results[word] = new Set();
+                results[word].add(entriesKey[i]);
+            };
+        });
+    };
+
+    // console.log(Array.from(results['the']))
+    return results;
+}
+
+// console.log(createIndex(book))
+
+function printIndex(book) {
+    let results = createIndex(book);
+
+    for (const [key, val] of Object.entries(results)) {
+        results[key] = Array.from(val);
+    };
+
+    return results;
+}
+
+// console.log(printIndex(book));
+
+function printBySize(book) {
+    let results = printIndex(book);
+    const printObj = Object.entries(results).sort( (a,b) => b[1].length - a[1].length)
+    return printObj;
+}
+
+// console.log(printBySize(book));
