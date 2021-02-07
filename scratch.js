@@ -656,4 +656,115 @@ function sortedMerge(a, b) {
     return merged.concat(a, b);
 }
 
-console.log(sortedMerge([10, 5, 15], [20, 3, 2]))
+// console.log(sortedMerge([10, 5, 15], [20, 3, 2]))
+
+//Given an array of meeting time intervals consisting of start and end times[[s1,e1],[s2,e2],...](si< ei), find the minimum number of conference rooms required.
+// Input: [[0, 30],[5, 10],[15, 20]]
+// Output: 2
+// Input: [[7,10],[2,4]]
+// Output:1
+
+
+// console.log(minMeetingRooms([[7, 10],[2, 4]]));
+// console.log(minMeetingRooms([[0, 30],[15, 20],[5, 10]]))
+
+var minMeetingRooms = function(intervals) {
+    var schedule = {};
+    
+    intervals.forEach((interval)=>{
+        schedule[interval.start] = schedule[interval.start] || 0;
+        schedule[interval.start]++;
+        
+        schedule[interval.end] = schedule[interval.end] || 0;
+        schedule[interval.end]--;
+    });
+    // console.log(schedule)
+    var maxRooms = 0;
+    var rooms = 0;
+    
+    for(var i in schedule) {
+        rooms += schedule[i];
+        // console.log('i',i, 'rooms', rooms)
+        maxRooms = Math.max(maxRooms, rooms);
+    }
+    
+    return maxRooms;
+};
+
+// var data = [
+//     {start: 9, end: 12},
+//     {start: 2, end: 7},
+//     {start: 5, end: 17},
+//     {start: 12, end: 17},
+// ]
+
+// var data = [
+//     {start: 0, end: 15},
+//     {start: 15, end: 20},
+//     {start: 5, end: 10},
+//     {start: 7, end: 10},
+//     {start: 21, end: 23},
+//     {start: 7, end: 30},
+// ]
+
+// console.log(minMeetingRooms(data));
+
+
+const data = [
+    [1000, 1450],
+    [100, 500],
+    [350, 900],
+    [250, 300],
+    [800, 900],
+    [1250, 2000]
+]
+// [
+//     [100, 500],
+//     [250, 300],
+//     [350, 900],
+//     [800, 900],
+//     [1000, 1450],
+//     [1250, 2000]
+// ]
+// [
+//     [250, 300],
+//     [100, 500],
+//     [350, 900],
+//     [800, 900],
+//     [1000, 1450],
+//     [1250, 2000]
+// ]
+
+NY = [
+    [100, 500],
+    [350, 900],
+    [1000, 1450],
+]
+
+// console.log(100+350+1000)
+SF = [
+    [250, 300],
+    [800, 900],
+    [1250, 2000]
+]
+// console.log(300+900+2000)
+//4650
+
+// function minRelo(cost) {
+//     const copy = Array.from(cost);
+//     const ny = cost.sort((a,b) => a[0] - b[0]);
+//     const sf = copy.sort((a,b) => a[1] - b[1]);
+//     const nyTracker = {};
+//     const sfTracker = {};
+
+//     let tracker = ny[0][0] < sf[0][1] ? 'ny' : 'sf';
+//     let totalCost = 0;
+//     for (let i = 0; i < cost.length; i++) {
+//         if (tracker === 'sf') {
+//             while ()
+//             totalCost += sf[i][1];
+//         }
+//     }
+// }
+
+// console.log(minRelo(data))
