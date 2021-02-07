@@ -631,3 +631,29 @@ function printBySize(book) {
 }
 
 // console.log(printBySize(book));
+
+//merge 2 unsorted arrays in sorted order
+//ex. a = [10, 5, 15] b = [20, 3, 2] => output = [2, 3, 5, 10, 15, 20]
+
+//brute force: sort a, sort b. do while loop until a or b is empty. then concat them.
+//n log n to sort. then n
+
+function sortedMerge(a, b) {
+    a.sort((y, z) => z - y);
+    b.sort((y, z) => z - y);
+
+    const merged = [];
+    while (a.length && b.length) {
+        let ele1 = a[a.length - 1];
+        let ele2 = b[b.length - 1];
+        if (ele1 < ele2) {
+            merged.push(a.pop());
+        } else {
+            merged.push(b.pop());
+        };
+    };
+    
+    return merged.concat(a, b);
+}
+
+console.log(sortedMerge([10, 5, 15], [20, 3, 2]))
