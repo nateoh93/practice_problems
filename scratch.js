@@ -768,3 +768,35 @@ SF = [
 // }
 
 // console.log(minRelo(data))
+
+var decodeString = function(s) {
+    let stack = [];
+    let nums = new Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']);
+    
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === ']') {
+            let tempStr = '';
+            let tempChar = stack.pop();
+            
+            while (tempChar !== '[') {
+                tempStr = tempChar + tempStr;
+                tempChar = stack.pop();
+            };
+            
+            let repeat = stack.pop();
+            let num = '';
+            
+            while (nums.has(repeat)) {
+                num = repeat + num;
+                repeat = stack.pop();
+            };
+            
+            stack.push(repeat, tempStr.repeat(parseInt(num)));
+            continue;
+        };
+        
+        stack.push(s[i]);
+    };
+    
+    return stack.join('');
+};
