@@ -800,3 +800,41 @@ var decodeString = function(s) {
     
     return stack.join('');
 };
+
+var twoCitySchedCost = function(costs) {
+    //sort by the biggest difference between 2 cities
+    //ex. costs = [[259,770],[448,54],[926,667],[184,139],[840,118],[577,469]]
+    
+    costs.sort((a, b) => (a[0] - a[1]) - (b[0] - b[1]));
+    
+    // costs = [[259, 770], //diff = -511
+    //          [184, 139], //45
+    //          [577, 469], //108
+    //          [926, 667], //259
+    //          [448, 54], //394
+    //          [840, 118] //722
+    // ]
+    
+    //if you sent everybody to B. you want to find the half that will give you the biggest refund 
+        // for sending them to A / or pay the smallest difference to send to A. ex. you get '511'
+        // refund for sending to A, you have to pay the smallest difference of '45' to send to
+        // A...'108' is the next smallest difference to go to A. the rest you keep in B.
+    //you can do this vice versa. logic would be reversed
+    
+    let length = costs.length / 2;
+    let totalCosts = 0;
+    for (let i = 0; i < length; i++) {
+        totalCosts += costs[i][0];
+    };
+    
+    for (let i = length; i < costs.length; i++) {
+        totalCosts += costs[i][1];
+    };
+    
+    // return costs.reduce((total, cost, index) => (index < costs.length / 2) ? total + cost[0] : total + cost[1], 0);
+    return totalCosts;
+};
+
+
+// console.log(twoCitySchedCost([[10,20],[30,200],[400,50],[30,20]]))
+// console.log(twoCitySchedCost([[259,770],[448,54],[926,667],[184,139],[840,118],[577,469]]))
