@@ -710,65 +710,6 @@ var minMeetingRooms = function(intervals) {
 // console.log(minMeetingRooms(data));
 
 
-const data = [
-    [1000, 1450],
-    [100, 500],
-    [350, 900],
-    [250, 300],
-    [800, 900],
-    [1250, 2000]
-]
-// [
-//     [100, 500],
-//     [250, 300],
-//     [350, 900],
-//     [800, 900],
-//     [1000, 1450],
-//     [1250, 2000]
-// ]
-// [
-//     [250, 300],
-//     [100, 500],
-//     [350, 900],
-//     [800, 900],
-//     [1000, 1450],
-//     [1250, 2000]
-// ]
-
-NY = [
-    [100, 500],
-    [350, 900],
-    [1000, 1450],
-]
-
-// console.log(100+350+1000)
-SF = [
-    [250, 300],
-    [800, 900],
-    [1250, 2000]
-]
-// console.log(300+900+2000)
-//4650
-
-// function minRelo(cost) {
-//     const copy = Array.from(cost);
-//     const ny = cost.sort((a,b) => a[0] - b[0]);
-//     const sf = copy.sort((a,b) => a[1] - b[1]);
-//     const nyTracker = {};
-//     const sfTracker = {};
-
-//     let tracker = ny[0][0] < sf[0][1] ? 'ny' : 'sf';
-//     let totalCost = 0;
-//     for (let i = 0; i < cost.length; i++) {
-//         if (tracker === 'sf') {
-//             while ()
-//             totalCost += sf[i][1];
-//         }
-//     }
-// }
-
-// console.log(minRelo(data))
-
 var decodeString = function(s) {
     let stack = [];
     let nums = new Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']);
