@@ -950,7 +950,7 @@ var exist = function(board, word) {
         if (board[x][y] !== word.charAt(index)) return false;
         if (board[x][y] === -1) return false;
         if (index === word.length - 1) return true;
-        
+
         const temp = board[x][y];
         board[x][y] = -1;
         
@@ -978,4 +978,26 @@ function isValidPos(board, x, y) {
     return true;
 };
 
-console.log(exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]],"ABCCED"))
+// console.log(exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]],"ABCCED"));
+
+var topKFrequent = function(words, k) {
+    let m = {};
+    words.forEach(word => {
+        if (!m[word]) {
+            m[word] = 1;
+        } else {
+            m[word]++;
+        };
+    });
+    let arr = Object.entries(m).sort((a,b) => b[1] - a[1]);
+
+    let results = [];
+    for (let i = 0; i < k; i++) {
+        results.push(arr[i][0]);
+    };
+    return results;
+    // Time Complexity: O(nlog(n))
+    // Space Complexity: O(n)
+};
+
+console.log(topKFrequent(["i", "love", "leetcode", "i", "love", "coding"], 2))
