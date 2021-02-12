@@ -798,7 +798,184 @@ function isPalindrome(input) {
 // console.log(isPalindrome("A man, a plan, a canal: Panama"))
 // console.log(isPalindrome("0P"))
 
-[["1","1","1","1","0"],
- ["1","1","0","1","0"],
- ["1","1","0","0","0"],
- ["0","0","0","0","0"]]
+// const UndergroundSystem = function() {
+//     this.routes = {}; // { 'startstation -> endstation' : [totalTime, numTrips]}
+//     this.customers = {}; // { id : [startStation, startTime]}
+// }
+
+// UndergroundSystem.prototype.checkIn = function(id, stationName, time) {
+//     this.customers[id] = [stationName, time];
+//     // console.log('checkin', this.customers, '------');
+// }
+
+// UndergroundSystem.prototype.checkOut = function(id, stationName, time) {
+//     const startStation = this.customers[id][0];
+//     const startTime = this.customers[id][1];
+//     delete this.customers[id];
+//     const key = startStation + stationName;
+//     const travelTime = time - startTime;
+    
+//     if (!this.routes[key]) {
+//         this.routes[key] = [travelTime, 1];
+//     } else {
+//         this.routes[key][0] += travelTime;
+//         this.routes[key][1] += 1;
+//     };
+//     // console.log('checkout',this.customers, this.routes, '------');
+// }
+
+// UndergroundSystem.prototype.getAverageTime = function(startStation, endStation) {
+//     // console.log('avg',this.routes, '------')
+//     const key = startStation + endStation;
+//     // console.log('key', key)
+//     const totalTime = this.routes[key][0];
+//     const totalCustomers = this.routes[key][1];
+
+//     return totalTime / totalCustomers;
+// }
+
+// undergroundSystem = new UndergroundSystem();
+// undergroundSystem.checkIn(45, 'Leyton', 3);
+// undergroundSystem.checkIn(32, 'Paradise', 8);
+// undergroundSystem.checkIn(27, 'Leyton', 10);
+// undergroundSystem.checkOut(45, 'Waterloo', 15);
+// undergroundSystem.checkOut(27, 'Waterloo', 20);
+// undergroundSystem.checkOut(32, 'Cambridge', 22);
+// console.log(undergroundSystem.getAverageTime('Paradise', 'Cambridge'));
+// console.log(undergroundSystem.getAverageTime('Leyton', 'Waterloo'));
+// undergroundSystem.checkIn(10, 'Leyton', 24);
+// console.log(undergroundSystem.getAverageTime('Leyton', 'Waterloo'));
+// undergroundSystem.checkOut(10, 'Waterloo', 38);
+// console.log(undergroundSystem.getAverageTime('Leyton', 'Waterloo'));
+
+//assumptions:
+    //customer can only check in one place at a time
+    //customer can only check out one place at a time
+    //checkout time will always be > checkin time
+    //checkin station !== checkout station
+    //average time between stations is directly from startstation to endstation
+    //do not need to store customer data after they've checked out
+    //can have multiple customers checked in at a time
+    //can assume check in and check out data will always be consistent
+
+class UndergroundSystem {
+    constructor() {
+        this.routes = {}; // { 'startstation -> endstation' : [totalTime, numTrips]}
+        this.customers = {}; // { id : [startStation, startTime]}
+    }
+
+    checkIn(id, stationName, time) {
+        this.customers[id] = [stationName, time];
+        // console.log('checkin', this.customers, '------');
+    }
+
+    checkOut(id, stationName, time) {
+        const startStation = this.customers[id][0];
+        const startTime = this.customers[id][1];
+        delete this.customers[id];
+        const key = startStation + stationName;
+        const travelTime = time - startTime;
+        
+        if (!this.routes[key]) {
+            this.routes[key] = [travelTime, 1];
+        } else {
+            this.routes[key][0] += travelTime;
+            this.routes[key][1] += 1;
+        };
+        // console.log('checkout',this.customers, this.routes, '------');
+    }
+
+    getAverageTime(startStation, endStation) {
+        // console.log('avg',this.routes, '------')
+        const key = startStation + endStation;
+        // console.log('key', key)
+        const totalTime = this.routes[key][0];
+        const totalCustomers = this.routes[key][1];
+    
+        return totalTime / totalCustomers;
+    }
+}
+
+// undergroundSystem = new UndergroundSystem();
+// undergroundSystem.checkIn(45, 'Leyton', 3);
+// undergroundSystem.checkIn(32, 'Paradise', 8);
+// undergroundSystem.checkIn(27, 'Leyton', 10);
+// undergroundSystem.checkOut(45, 'Waterloo', 15);
+// undergroundSystem.checkOut(27, 'Waterloo', 20);
+// undergroundSystem.checkOut(32, 'Cambridge', 22);
+// console.log(undergroundSystem.getAverageTime('Paradise', 'Cambridge'));
+// console.log(undergroundSystem.getAverageTime('Leyton', 'Waterloo'));
+// undergroundSystem.checkIn(10, 'Leyton', 24);
+// console.log(undergroundSystem.getAverageTime('Leyton', 'Waterloo'));
+// undergroundSystem.checkOut(10, 'Waterloo', 38);
+// console.log(undergroundSystem.getAverageTime('Leyton', 'Waterloo'));
+
+var invalidTransactions = function(transactions) {
+    const invalid = [];
+    const hashMap = {};
+    
+    for (const transaction of transactions) {
+        const [name, time, amount, city] = transaction.split(',');
+        
+        if (name in hashMap) {
+            hashMap[name].push({ time, city });
+        } else {
+            hashMap[name] = [{ time, city }];
+        };
+    };
+    
+    for (const transaction of transactions) {
+        if (isInvalid(transaction, hashMap)) invalid.push(transaction);
+    };
+    
+    return invalid;
+};
+
+function isInvalid(transaction, hashMap) {
+    const [name, time, amount, city] = transaction.split(',');
+    if (amount > 1000) return true;
+    
+    const previousTransactions = hashMap[name];
+    
+    for (const trans of previousTransactions) {
+        if (city !== trans.city && Math.abs(time - trans.time) <= 60) return true;
+    };
+    
+    return false;
+};
+
+var exist = function(board, word) {
+    function dfs(x, y, index=0) {
+        if (!isValidPos(board, x, y)) return false;
+        if (board[x][y] !== word.charAt(index)) return false;
+        if (board[x][y] === -1) return false;
+        if (index === word.length - 1) return true;
+        
+        const temp = board[x][y];
+        board[x][y] = -1;
+        
+        if (dfs(x+1, y, index+1)) return true;
+        if (dfs(x-1, y, index+1)) return true;
+        if (dfs(x, y+1, index+1)) return true;
+        if (dfs(x, y-1, index+1)) return true;
+        
+        board[x][y] = temp;
+        return false;
+    };
+    
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[0].length; j++) {
+            let currPos = board[i][j]
+            if (currPos === word.charAt(0) && dfs(i, j)) return true;
+        };
+    };
+    
+    return false;
+};
+
+function isValidPos(board, x, y) {
+    if (x < 0 || x >= board.length || y < 0 || y >= board[0].length) return false;
+    return true;
+};
+
+console.log(exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]],"ABCCED"))
