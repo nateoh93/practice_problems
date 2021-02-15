@@ -1000,4 +1000,12 @@ var topKFrequent = function(words, k) {
     // Space Complexity: O(n)
 };
 
-console.log(topKFrequent(["i", "love", "leetcode", "i", "love", "coding"], 2))
+// console.log(topKFrequent(["i", "love", "leetcode", "i", "love", "coding"], 2))
+
+// top k stocks
+
+// Design an aggregator class for sum, count, avg for a stream of numbers without if else loop for checking type of aggregator each time
+
+// Custom Index Engine
+
+// Consider the browser search where you type an URL. You need to keep track of the history and to print the most recent URLs the user searched. More or less LRU cache
