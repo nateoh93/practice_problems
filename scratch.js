@@ -896,20 +896,6 @@ class UndergroundSystem {
     }
 }
 
-// undergroundSystem = new UndergroundSystem();
-// undergroundSystem.checkIn(45, 'Leyton', 3);
-// undergroundSystem.checkIn(32, 'Paradise', 8);
-// undergroundSystem.checkIn(27, 'Leyton', 10);
-// undergroundSystem.checkOut(45, 'Waterloo', 15);
-// undergroundSystem.checkOut(27, 'Waterloo', 20);
-// undergroundSystem.checkOut(32, 'Cambridge', 22);
-// console.log(undergroundSystem.getAverageTime('Paradise', 'Cambridge'));
-// console.log(undergroundSystem.getAverageTime('Leyton', 'Waterloo'));
-// undergroundSystem.checkIn(10, 'Leyton', 24);
-// console.log(undergroundSystem.getAverageTime('Leyton', 'Waterloo'));
-// undergroundSystem.checkOut(10, 'Waterloo', 38);
-// console.log(undergroundSystem.getAverageTime('Leyton', 'Waterloo'));
-
 var invalidTransactions = function(transactions) {
     const invalid = [];
     const hashMap = {};
