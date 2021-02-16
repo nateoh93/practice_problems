@@ -997,3 +997,16 @@ var topKFrequent = function(words, k) {
 // Consider the browser search where you type an URL. You need to keep track of the history and to print the most recent URLs the user searched. More or less LRU cache
 
 //favorite data structure
+
+const decrement = setInterval(timer, 1000);
+let second = 5;
+function timer() {
+    second--;
+    console.log(second);
+    if (second <= 0) {
+        clearInterval(decrement)
+    };
+
+}
+
+// console.log(decrement);
