@@ -1010,3 +1010,35 @@ function timer() {
 }
 
 // console.log(decrement);
+
+class UndergroundSystem {
+    constructor() {
+        this.routes = {};
+        this.customers = {};
+    }
+
+    checkIn(id, stationName, t) {
+        this.customers[id] = [stationName, t];
+    }
+
+    checkOut(id, stationName, t) {
+        const startStation = this.customers[id][0];
+        const startTime = this.customers[id][1];
+        const totalTime = t - startTime;
+        const key = startStation + stationName;
+        if (!this.routes[key]) {
+            this.routes[key] = [1, totalTime];
+        } else {
+            this.routes[key][0]++;
+            this.routes[key][1] += totalTime;
+        };
+    }
+
+    getAverageTime(start, end) {
+        const key = start + end;
+        const time = this.routes[key][1];
+        const numPeople = this.routes[key][0];
+
+        return time / numPeople;
+    }
+}
