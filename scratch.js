@@ -896,6 +896,7 @@ class UndergroundSystem {
     }
 }
 
+//invalid transactions
 var invalidTransactions = function(transactions) {
     const invalid = [];
     const hashMap = {};
@@ -930,6 +931,7 @@ function isInvalid(transaction, hashMap) {
     return false;
 };
 
+//word search
 var exist = function(board, word) {
     function dfs(x, y, index=0) {
         if (!isValidPos(board, x, y)) return false;
@@ -1042,3 +1044,259 @@ class UndergroundSystem {
         return time / numPeople;
     }
 }
+
+class BrowserHistory {
+    constructor(homepage) {
+        this.backwards = [homepage];
+        this.forwards = [];
+    }
+
+    visit(url) {
+        this.backwards.push(url);
+        this.forwards = [];
+    }
+    //[google, face, yout, leet] //steps = 4 length = 4
+    back(steps) {
+        while (steps > 0) {
+            if (this.backwards.length === 1) break;
+            this.forwards.push(this.backwards.pop());
+            steps--;
+        };
+
+        return this.backwards[this.backwards.length - 1];
+    }
+
+    forward(steps) {
+        while (steps > 0) {
+            if (this.forwards.length === 0) break;
+            this.backwards.push(this.forwards.pop());
+            steps--;
+        };
+
+        return this.backwards[this.backwards.length - 1];
+    }
+}
+
+class HitCounter {
+    constructor() {
+        this.counter = [];
+    }
+
+    hit(timestamp) {
+        this.counter.push(timestamp);
+    }
+
+    getHits(timestamp, limit=300) {
+        let bottomLimit = timestamp > limit ? timestamp - limit : 0;
+
+        while (this.counter.length) {
+            const ele = this.counter[0];
+            if (ele <= bottomLimit) {
+                this.counter.shift();
+            } else {
+                break;
+            };
+        };
+
+        return this.counter.length;
+    }
+}
+
+var subsets = function(nums) {
+    const sets = [[]];
+    
+    for (let i = 0; i < nums.length; i++) {
+        let tempArr = [];
+        
+        for (let j = 0; j < sets.length; j++) {
+            tempArr.push([...sets[j], nums[i]]);
+        };
+        
+        sets.push(...tempArr);
+    };
+    
+    return sets;
+};
+
+var isValidBST = function(root, min=-Infinity, max=Infinity) {
+    if (!root) return true;
+    if (root.val <= min || root.val >= max) return false;
+    
+    let isLeftValid = isValidBST(root.left, min, root.val);
+    let isRightValid = isValidBST(root.right, root.val, max);
+    
+    return isLeftValid && isRightValid
+    
+    //DFS
+    //start at root
+        //is left node < root?
+            //if no - return false
+            //if yes and left node has children, search again but pass in 'current root'
+        //is right node > root?
+            //if no - return false
+            //if yes and right node has children, search again but pass in 'current root'
+};
+
+var numIslands = function(grid) {
+    //iterate through the grid - nested loop (n^2)
+    //if you find land - DFS - find neighbor coord (N, S, W, E) 
+            //coordinates = [[0,1], [0, -1], [-1,0], [1,0]]
+        //search coordinates if it's land push onto stack
+            //add currCoord to all coordinate e.g. curr = [1][1]. neighbors = [[0,1],[1,0],[1,2],[2,1]]
+        //keep going until stack is empty
+            //after stack is empty increase island count
+        //change value to X after examining coordinate
+    //if you water or X keep moving
+    //have edge case for if you are edge of grid.
+        //[x,y]. 0<=x<grid.length 0<=y<grid[0].length
+    
+    let numIslands = 0;
+    const coordinates = [[0,1], [0,-1], [-1,0], [1,0]];
+    
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[0].length; j++) {
+            let currPos = grid[i][j];
+            if (currPos === 'x' || currPos === '0') continue;
+            
+            grid[i][j] = 'x';
+            const stack = [];
+            coordinates.forEach( coord => {
+                let x = coord[0] + i;
+                let y = coord[1] + j;
+                let potNeighbor;
+                if (isValidPos([x,y], grid)) potNeighbor = grid[x][y];
+                
+                if (potNeighbor && potNeighbor === '1') {
+                    stack.push([x, y]);
+                    grid[x][y] = 'x';
+                };
+            });
+            
+            while (stack.length) {
+                console.log('stack',stack)
+                let coordinate = stack.pop();
+                coordinates.forEach( coord => {
+                    let subX = coord[0] + coordinate[0];
+                    let subY = coord[1] + coordinate[1];
+                    let neighbors;
+                    if (isValidPos([subX, subY], grid)) neighbors = grid[subX][subY];
+                    
+                    if (neighbors && neighbors === '1') {
+                        stack.push([subX, subY]);
+                        grid[subX][subY] = 'x';
+                    };
+                });
+            };
+            numIslands++;
+        };
+    };
+    
+    return numIslands
+};
+    
+var isValidPos = function(coordinate, grid) {
+    const x = coordinate[0],
+        y = coordinate[1],
+        xValid = 0 <= x && x < grid.length,
+        yValid = 0 <= y && y < grid[0].length;
+    
+    return xValid && yValid;
+}
+
+var merge = function(intervals) {
+    intervals.sort((a,b) => a[0] - b[0]);
+    
+    let results = [intervals[0]];
+    
+    for (let i = 1; i < intervals.length; i++) {
+        let currentS = intervals[i][0];
+        let currentE = intervals[i][1];
+        let prevE = results[results.length - 1][1];
+        
+        if (currentS <= prevE) {
+            results[results.length - 1][1] = Math.max(currentE, prevE);
+        } else {
+            results.push(intervals[i]);
+        };
+    };
+    
+    return results;
+};
+
+var removeDuplicates = function(s, k) {
+    const stack = [];
+    for (let i = 0; i < s.length; i++) {
+        let currChar = s[i];
+        let recentChar = stack[stack.length - 1];
+        
+        if (stack.length && recentChar[0] === currChar) {
+            recentChar[1] === k - 1 ? stack.pop() : recentChar[1]++;
+        } else {
+            stack.push([currChar, 1]);
+        };
+    };
+    
+    let str = ''
+    for (let i = 0; i < stack.length; i++) {
+        str += stack[i][0].repeat(stack[i][1]);
+    }
+    
+    return str;
+};
+
+var decodeString = function(s) {
+    let stack = [];
+    let nums = new Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']);
+    
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === ']') {
+            let tempStr = '';
+            let tempChar = stack.pop();
+            
+            while (tempChar !== '[') {
+                tempStr = tempChar + tempStr;
+                tempChar = stack.pop();
+            };
+            
+            let repeat = stack.pop();
+            let num = '';
+            
+            while (nums.has(repeat)) {
+                num = repeat + num;
+                repeat = stack.pop();
+            };
+            
+            stack.push(repeat, tempStr.repeat(parseInt(num)));
+            continue;
+        };
+        
+        stack.push(s[i]);
+    };
+    
+    return stack.join('');
+};
+
+//flatten multilevel doubly linked list
+var flatten = function(head) {
+    let curr = head;
+    const stack = [];
+    
+    while (curr) {
+        if (curr.child) {
+            if (curr.next !== null) stack.push(curr.next);
+            curr.next = curr.child;
+            curr.next.prev = curr;
+            curr.child = null;
+        };
+        
+        if (curr.next === null && stack.length > 0) {
+            let node = stack.pop();
+            curr.next = node;
+            curr.next.prev = curr;
+        };
+        
+        curr = curr.next;
+    };
+    
+    return head
+};
