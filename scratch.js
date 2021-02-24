@@ -1300,3 +1300,5 @@ var flatten = function(head) {
     
     return head
 };
+
+// console.log(flatten())
